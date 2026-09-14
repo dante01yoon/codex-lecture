@@ -1,0 +1,4 @@
+{
+  "code": "const results = await Promise.all([\n  tools.exec_command({ cmd: \"pwd\", workdir: \"/path/to/codemode_lecture\" }),\n  tools.exec_command({ cmd: \"date +%Y\", workdir: \"/path/to/codemode_lecture\" })\n]);\nfor (const result of results) text(result.output.trim());\n",
+  "publication_note": "공개 배포를 위해 실제 로컬 절대 경로만 /path/to/codemode_lecture로 치환했습니다. 실행 당시 코드와 반환값의 원본 대조는 제작 환경에서 수행했습니다. 이 경로는 실행용 경로가 아닙니다."
+}

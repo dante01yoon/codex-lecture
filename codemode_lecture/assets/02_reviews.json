@@ -1,0 +1,52 @@
+{
+  "id": "02_reviews",
+  "prompt": "강의용 합성 리뷰 6월, 7월, 8월 파일을 read_reviews로 읽어줘. Code Mode 안에서 세 조회를 묶고 JSON을 파싱해. id로 중복 제거 후 월별 고유 리뷰 수와 평점별 개수, 낮은 평점(1~2점) 리뷰 수를 계산해. topic_hint는 합성 데이터의 정답 라벨이므로 의미 분류 능력으로 소개하지 말고 검증용 집계에만 사용해. 전체 원문을 출력하지 말고 총 입력 행 수, 고유 수, 중복 수, 월별 집계, 낮은 평점 주제별 개수와 대표 원문 한 개 및 id만 출력해. 한국어로 짧게 설명해.",
+  "duration": 33.19,
+  "exit_code": 0,
+  "code_mode_calls": 2,
+  "events": [
+    {
+      "type": "code",
+      "code": "const lessonTools = ALL_TOOLS.filter(x =>\n  x.name.toLowerCase().includes(\"lesson\") ||\n  x.name.toLowerCase().includes(\"read_reviews\") ||\n  x.description.toLowerCase().includes(\"review\")\n);\ntext(lessonTools);\n",
+      "call_id": "call_wPnvQ7vkOSA0XD0rWbo9JqDb"
+    },
+    {
+      "type": "output",
+      "output": [
+        {
+          "type": "input_text",
+          "text": "[공개 배포본: 강의와 무관한 설치 도구 목록을 생략했습니다. 실제 처리 코드와 결과는 뒤의 기록에 보존했습니다.]"
+        }
+      ],
+      "call_id": "call_wPnvQ7vkOSA0XD0rWbo9JqDb",
+      "publication_redaction": "Unrelated installed tool catalogue omitted"
+    },
+    {
+      "type": "code",
+      "code": "const months = [\"06\", \"07\", \"08\"];\nconst results = await Promise.all(\n  months.map(month => tools.mcp__lesson__read_reviews({ month }))\n);\n\nfunction parseTextJson(result) {\n  const blocks = Array.isArray(result?.content) ? result.content : [];\n  const texts = blocks\n    .filter(block => block?.type === \"text\" && typeof block.text === \"string\")\n    .map(block => block.text);\n  if (!texts.length) throw new Error(\"text 블록이 없습니다.\");\n\n  const parsed = texts.map(value => JSON.parse(value));\n  if (parsed.length === 1) return parsed[0];\n  return parsed;\n}\n\nfunction findRows(value) {\n  if (Array.isArray(value)) {\n    if (value.length === 0 || value.every(x => x && typeof x === \"object\" && !Array.isArray(x))) {\n      return value;\n    }\n    for (const item of value) {\n      const found = findRows(item);\n      if (found) return found;\n    }\n  }\n  if (value && typeof value === \"object\") {\n    for (const key of [\"reviews\", \"rows\", \"items\", \"data\", \"results\"]) {\n      if (key in value) {\n        const found = findRows(value[key]);\n        if (found) return found;\n      }\n    }\n    for (const child of Object.values(value)) {\n      const found = findRows(child);\n      if (found) return found;\n    }\n  }\n  return null;\n}\n\nconst monthlyRows = results.map((result, i) => {\n  const parsed = parseTextJson(result);\n  const rows = findRows(parsed);\n  if (!rows) throw new Error(`${months[i]}월 리뷰 배열을 찾지 못했습니다.`);\n  return { month: months[i], rows };\n});\n\nconst all = monthlyRows.flatMap(({ month, rows }) =>\n  rows.map(row => ({ ...row, _sourceMonth: month }))\n);\nconst totalInput = all.length;\n\nconst uniqueById = new Map();\nfor (const row of all) {\n  const id = String(row.id);\n  if (!uniqueById.has(id)) uniqueById.set(id, row);\n}\nconst unique = [...uniqueById.values()];\nconst duplicateCount = totalInput - unique.length;\n\nconst monthStats = Object.fromEntries(months.map(month => [\n  month,\n  { uniqueReviews: 0, ratings: { \"1\": 0, \"2\": 0, \"3\": 0, \"4\": 0, \"5\": 0 }, lowRatings: 0 }\n]));\n\nfor (const row of unique) {\n  const monthValue = String(row.month ?? row.review_month ?? row._sourceMonth).padStart(2, \"0\").slice(-2);\n  const month = months.includes(monthValue) ? monthValue : row._sourceMonth;\n  const rating = Number(row.rating ?? row.score ?? row.stars);\n  monthStats[month].uniqueReviews++;\n  if (Number.isFinite(rating)) {\n    const key = String(rating);\n    monthStats[month].ratings[key] = (monthStats[month].ratings[key] ?? 0) + 1;\n    if (rating <= 2) monthStats[month].lowRatings++;\n  }\n}\n\nconst lowTopicMap = new Map();\nfor (const row of unique) {\n  const rating = Number(row.rating ?? row.score ?? row.stars);\n  if (rating < 1 || rating > 2) continue;\n  const topic = String(row.topic_hint ?? \"미지정\");\n  const original = row.review ?? row.text ?? row.content ?? row.body ?? row.comment ?? \"\";\n  if (!lowTopicMap.has(topic)) {\n    lowTopicMap.set(topic, { count: 0, representative: { id: row.id, text: original } });\n  }\n  lowTopicMap.get(topic).count++;\n}\n\ntext(JSON.stringify({\n  totalInputRows: totalInput,\n  uniqueCount: unique.length,\n  duplicateCount,\n  monthly: monthStats,\n  lowRatingTopics: Object.fromEntries(lowTopicMap)\n}, null, 2));\n",
+      "call_id": "call_rpDiHOUTCcgF2HHFrWFZmz53"
+    },
+    {
+      "type": "output",
+      "output": [
+        {
+          "type": "input_text",
+          "text": "Script completed\nWall time 0.0 seconds\nOutput:\n"
+        },
+        {
+          "type": "input_text",
+          "text": "{\n  \"totalInputRows\": 125,\n  \"uniqueCount\": 120,\n  \"duplicateCount\": 5,\n  \"monthly\": {\n    \"06\": {\n      \"uniqueReviews\": 40,\n      \"ratings\": {\n        \"1\": 15,\n        \"2\": 10,\n        \"3\": 0,\n        \"4\": 7,\n        \"5\": 8\n      },\n      \"lowRatings\": 25\n    },\n    \"07\": {\n      \"uniqueReviews\": 40,\n      \"ratings\": {\n        \"1\": 12,\n        \"2\": 14,\n        \"3\": 0,\n        \"4\": 6,\n        \"5\": 8\n      },\n      \"lowRatings\": 26\n    },\n    \"08\": {\n      \"uniqueReviews\": 40,\n      \"ratings\": {\n        \"1\": 15,\n        \"2\": 10,\n        \"3\": 0,\n        \"4\": 8,\n        \"5\": 7\n      },\n      \"lowRatings\": 25\n    }\n  },\n  \"lowRatingTopics\": {\n    \"배송\": {\n      \"count\": 29,\n      \"representative\": {\n        \"id\": \"R06001\",\n        \"text\": \"배송이 예정일보다 늦었어요.\"\n      }\n    },\n    \"설명\": {\n      \"count\": 20,\n      \"representative\": {\n        \"id\": \"R06002\",\n        \"text\": \"설명서가 이해하기 어려워요.\"\n      }\n    },\n    \"포장\": {\n      \"count\": 27,\n      \"representative\": {\n        \"id\": \"R06003\",\n        \"text\": \"상자가 찌그러져 왔어요.\"\n      }\n    }\n  }\n}"
+        }
+      ],
+      "call_id": "call_rpDiHOUTCcgF2HHFrWFZmz53"
+    }
+  ],
+  "usage": {
+    "input_tokens": 76969,
+    "cached_input_tokens": 46720,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1346,
+    "reasoning_output_tokens": 20
+  },
+  "answer": "총 125행을 확인했고, `id` 기준 고유 리뷰는 120개, 중복은 5개입니다.\n\n| 월 | 고유 리뷰 | 1점 | 2점 | 3점 | 4점 | 5점 | 낮은 평점(1~2점) |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| 6월 | 40 | 15 | 10 | 0 | 7 | 8 | 25 |\n| 7월 | 40 | 12 | 14 | 0 | 6 | 8 | 26 |\n| 8월 | 40 | 15 | 10 | 0 | 8 | 7 | 25 |\n\n낮은 평점의 `topic_hint` 검증 집계:\n\n- 배송: 29개 — `R06001` / “배송이 예정일보다 늦었어요.”\n- 설명: 20개 — `R06002` / “설명서가 이해하기 어려워요.”\n- 포장: 27개 — `R06003` / “상자가 찌그러져 왔어요.”"
+}

@@ -1,0 +1,71 @@
+{
+  "id": "04_github",
+  "prompt": "공개 astral-sh/ruff 저장소의 열린 PR 5개를 list_pull_requests로 조회하고, 그 번호들로 read_pull_request를 호출해. Code Mode에서 독립적인 상세 조회는 Promise.allSettled로 묶어. 초안 여부, 변경 파일 수, 리뷰 기록 유무, 링크를 표로 정리해. 리뷰 기록이 있다는 사실을 현재 승인 완료로 해석하지 마. 이 실습 도구는 CI 데이터를 반환하지 않으니 검사 상태를 지어내지 말고 미조회로 표시해. 개별 조회 실패는 PR 상태와 구분해. 한국어로 간결하게 답해.",
+  "duration": 30.41,
+  "exit_code": 0,
+  "code_mode_calls": 3,
+  "events": [
+    {
+      "type": "code",
+      "code": "const matches = ALL_TOOLS.filter(x =>\n  /list_pull_requests|read_pull_request|pull request/i.test(`${x.name} ${x.description}`)\n);\ntext(matches);\n",
+      "call_id": "call_1ljek4VBXvAk1ldhsOXNdxzV"
+    },
+    {
+      "type": "output",
+      "output": [
+        {
+          "type": "input_text",
+          "text": "[공개 배포본: 강의와 무관한 설치 도구 목록을 생략했습니다. 실제 처리 코드와 결과는 뒤의 기록에 보존했습니다.]"
+        }
+      ],
+      "call_id": "call_1ljek4VBXvAk1ldhsOXNdxzV",
+      "publication_redaction": "Unrelated installed tool catalogue omitted"
+    },
+    {
+      "type": "code",
+      "code": "const r = await tools.mcp__lesson__list_pull_requests({});\nconst blocks = Array.isArray(r?.content) ? r.content : [];\nconst parsed = blocks\n  .filter(b => b?.type === \"text\" && typeof b.text === \"string\")\n  .map(b => {\n    try { return JSON.parse(b.text); }\n    catch { return { parse_error: true, text: b.text }; }\n  });\ntext(JSON.stringify(parsed));\n",
+      "call_id": "call_Vzzzk8J12AnS8utaJOXjbbrX"
+    },
+    {
+      "type": "output",
+      "output": [
+        {
+          "type": "input_text",
+          "text": "Script completed\nWall time 0.4 seconds\nOutput:\n"
+        },
+        {
+          "type": "input_text",
+          "text": "[[{\"number\":28568,\"title\":\"[ty] Avoid scanning constraint fuel history\",\"draft\":true,\"url\":\"https://github.com/astral-sh/ruff/pull/28568\",\"sha\":\"66442f98a87fcce5a1cc5c8902ad6f3cdb9c1db7\"},{\"number\":28565,\"title\":\"`[pylint]` Recognize more underscore-prefixed public members in `PLC2701` and `SLF001`\",\"draft\":false,\"url\":\"https://github.com/astral-sh/ruff/pull/28565\",\"sha\":\"b9b91b768ae3d3ee5f7661b779a65a87a0f83b7d\"},{\"number\":28562,\"title\":\"[ty] Honor generic property setters in protocol compatibility\",\"draft\":true,\"url\":\"https://github.com/astral-sh/ruff/pull/28562\",\"sha\":\"59f7a1582aa8594e289207d22f200e2d7e50a791\"},{\"number\":28561,\"title\":\"[ty] Preserve type alias docstrings in hover\",\"draft\":true,\"url\":\"https://github.com/astral-sh/ruff/pull/28561\",\"sha\":\"95e3d3fee112807d0d585947bd09f3526681ee3d\"},{\"number\":28560,\"title\":\"[ty] Preserve inherited attribute storage contracts\",\"draft\":true,\"url\":\"https://github.com/astral-sh/ruff/pull/28560\",\"sha\":\"691abb49f6db13e39703929341b12f2ff76e2d11\"}]]"
+        }
+      ],
+      "call_id": "call_Vzzzk8J12AnS8utaJOXjbbrX"
+    },
+    {
+      "type": "code",
+      "code": "const numbers = [28568, 28565, 28562, 28561, 28560];\nconst settled = await Promise.allSettled(\n  numbers.map(number => tools.mcp__lesson__read_pull_request({ number }))\n);\nconst output = settled.map((entry, i) => {\n  if (entry.status === \"rejected\") {\n    return { number: numbers[i], lookup: \"failed\", error: String(entry.reason) };\n  }\n  const blocks = Array.isArray(entry.value?.content) ? entry.value.content : [];\n  const texts = blocks.filter(b => b?.type === \"text\" && typeof b.text === \"string\");\n  const parsed = texts.map(b => {\n    try { return JSON.parse(b.text); }\n    catch { return { parse_error: true, text: b.text }; }\n  });\n  return {\n    number: numbers[i],\n    lookup: entry.value?.isError ? \"tool_error\" : \"succeeded\",\n    parsed\n  };\n});\ntext(JSON.stringify(output));\n",
+      "call_id": "call_stwIHSTe64UXXiL9lKvGiPBe"
+    },
+    {
+      "type": "output",
+      "output": [
+        {
+          "type": "input_text",
+          "text": "Script completed\nWall time 3.0 seconds\nOutput:\n"
+        },
+        {
+          "type": "input_text",
+          "text": "[{\"number\":28568,\"lookup\":\"succeeded\",\"parsed\":[{\"number\":28568,\"title\":\"[ty] Avoid scanning constraint fuel history\",\"draft\":true,\"url\":\"https://github.com/astral-sh/ruff/pull/28568\",\"changed_files\":1,\"review_states\":[],\"mergeable_state\":\"clean\",\"note\":\"review_states are historical reviews; not the current branch protection approval verdict\"}]},{\"number\":28565,\"lookup\":\"succeeded\",\"parsed\":[{\"number\":28565,\"title\":\"`[pylint]` Recognize more underscore-prefixed public members in `PLC2701` and `SLF001`\",\"draft\":false,\"url\":\"https://github.com/astral-sh/ruff/pull/28565\",\"changed_files\":6,\"review_states\":[],\"mergeable_state\":\"unstable\",\"note\":\"review_states are historical reviews; not the current branch protection approval verdict\"}]},{\"number\":28562,\"lookup\":\"succeeded\",\"parsed\":[{\"number\":28562,\"title\":\"[ty] Honor generic property setters in protocol compatibility\",\"draft\":true,\"url\":\"https://github.com/astral-sh/ruff/pull/28562\",\"changed_files\":3,\"review_states\":[],\"mergeable_state\":\"clean\",\"note\":\"review_states are historical reviews; not the current branch protection approval verdict\"}]},{\"number\":28561,\"lookup\":\"succeeded\",\"parsed\":[{\"number\":28561,\"title\":\"[ty] Preserve type alias docstrings in hover\",\"draft\":true,\"url\":\"https://github.com/astral-sh/ruff/pull/28561\",\"changed_files\":4,\"review_states\":[],\"mergeable_state\":\"unstable\",\"note\":\"review_states are historical reviews; not the current branch protection approval verdict\"}]},{\"number\":28560,\"lookup\":\"succeeded\",\"parsed\":[{\"number\":28560,\"title\":\"[ty] Preserve inherited attribute storage contracts\",\"draft\":true,\"url\":\"https://github.com/astral-sh/ruff/pull/28560\",\"changed_files\":11,\"review_states\":[],\"mergeable_state\":\"unstable\",\"note\":\"review_states are historical reviews; not the current branch protection approval verdict\"}]}]"
+        }
+      ],
+      "call_id": "call_stwIHSTe64UXXiL9lKvGiPBe"
+    }
+  ],
+  "usage": {
+    "input_tokens": 107029,
+    "cached_input_tokens": 57856,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 867,
+    "reasoning_output_tokens": 76
+  },
+  "answer": "`astral-sh/ruff`의 열린 PR 5개를 조회하고, 상세 조회를 `Promise.allSettled`로 병렬 실행했습니다.\n\n| PR | 초안 | 변경 파일 | 리뷰 기록 | CI 검사 | 상세 조회 | 링크 |\n|---:|:---:|---:|:---:|:---:|:---:|---|\n| #28568 | 예 | 1 | 없음 | 미조회 | 성공 | [PR 열기](https://github.com/astral-sh/ruff/pull/28568) |\n| #28565 | 아니요 | 6 | 없음 | 미조회 | 성공 | [PR 열기](https://github.com/astral-sh/ruff/pull/28565) |\n| #28562 | 예 | 3 | 없음 | 미조회 | 성공 | [PR 열기](https://github.com/astral-sh/ruff/pull/28562) |\n| #28561 | 예 | 4 | 없음 | 미조회 | 성공 | [PR 열기](https://github.com/astral-sh/ruff/pull/28561) |\n| #28560 | 예 | 11 | 없음 | 미조회 | 성공 | [PR 열기](https://github.com/astral-sh/ruff/pull/28560) |\n\n리뷰 기록은 과거 리뷰의 존재만 뜻하며 현재 승인 여부는 아닙니다. 이번 5건에는 리뷰 기록이 없었습니다. 도구가 CI 데이터를 반환하지 않아 검사 상태는 모두 미조회로 표기했습니다."
+}

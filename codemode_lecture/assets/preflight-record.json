@@ -1,0 +1,20 @@
+{
+  "label": "2026-09-13 강의 준비 중 실제 사전 실행 (미국 동부 시간)",
+  "request": "Use functions.exec JavaScript to call the shell tool twice in Promise.all for pwd and date +%Y. Print the code-mode result. Do not read other files or use subagents.",
+  "request_ko": "Code Mode에서 현재 폴더(pwd)와 올해 연도(date +%Y)를 조회하는 두 작업을 Promise.all로 묶고 결과를 출력해줘. 다른 파일은 읽지 마.",
+  "recorded_at_utc": "2026-09-14T02:18:58.829Z",
+  "code": "const results = await Promise.all([\n  tools.exec_command({ cmd: \"pwd\", workdir: \"/path/to/codemode_lecture\" }),\n  tools.exec_command({ cmd: \"date +%Y\", workdir: \"/path/to/codemode_lecture\" })\n]);\nfor (const result of results) text(result.output.trim());\n",
+  "output": [
+    "Script completed\nWall time 0.2 seconds\nOutput:\n",
+    "/path/to/codemode_lecture",
+    "2026"
+  ],
+  "checks": {
+    "actual_exec_input_matches_displayed_code": true,
+    "matching_call_output_found": true,
+    "directory_result": "/path/to/codemode_lecture",
+    "year_result": "2026"
+  },
+  "scope": "원본 세션에서 이 작업의 요청, exec 입력, 같은 호출의 반환값만 발췌. 개인 대화·시스템 지침 제외. 성능 비교 실험 아님.",
+  "publication_note": "공개 배포를 위해 실제 로컬 절대 경로만 /path/to/codemode_lecture로 치환했습니다. 실행 당시 코드와 반환값의 원본 대조는 제작 환경에서 수행했습니다. 이 경로는 실행용 경로가 아닙니다."
+}

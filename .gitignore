@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+.codex/
+node_modules/
+*.mp4
+*.wav
+*.mp3
+codemode_lecture/qa/*
+!codemode_lecture/qa/independent-checks.json
+!codemode_lecture/qa/distribution-check.json

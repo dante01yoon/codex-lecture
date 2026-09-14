@@ -1,0 +1,29 @@
+{
+  "checked_date": "2026-09-14",
+  "distribution_mcp_initialize": "PASS",
+  "tool_count": 6,
+  "reviews_june_rows": 40,
+  "synthetic_review_totals": [
+    125,
+    120,
+    76
+  ],
+  "python_syntax": "PASS",
+  "public_secret_pattern_scan": "PASS",
+  "viewer": "PASS: browser request/code/output view and reviews result",
+  "fresh_codex_review_run": "PASS",
+  "platform": "macOS",
+  "other_platforms": "NOT_RUN",
+  "fresh_run_code_mode_calls": 2,
+  "fresh_run_duration_seconds": 36.88,
+  "fresh_run_output_sha256": "2265e71d123052d4de24dcf7ed0a425ab613c8528ffee4ea3d8a745aaf0560bb",
+  "fresh_run_structured_output_totals": [
+    125,
+    120,
+    5,
+    76
+  ],
+  "relative_document_links": "PASS",
+  "live_public_service_rerun": "NOT_RUN; recorded fixtures retained",
+  "live_github_rerun": "NOT_RUN; recorded fixtures retained"
+}
