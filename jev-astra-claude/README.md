@@ -18,4 +18,4 @@ Codex CLI(Astra)와 Claude Code는 코드를 만드는 에이전트이고, Jev�
 - [`history/package-validation.json`](history/package-validation.json): 배포 ZIP 검사
 - [`captions/`](captions/): 최종 편집본의 한국어 SRT와 챕터
 
-개인 API 키, 로그인 기록, 원시 CLI 세션, 음성 프로필은 공유 자료에서 제외했습니다. 최종 MP4는 이 실습 저장소에 포함하지 않았습니다. 검수 기록 기준 YouTube 업로드는 아직 하지 않았고, 사람의 전편 음성 청취 판정도 남아 있지 않습니다.
+개인 API 키, 로그인 기록, 원시 CLI 세션, 음성 프로필은 공유 자료에서 제외했습니다. 최종 MP4는 이 실습 저장소에 포함하지 않았습니다. [YouTube 영상](https://youtu.be/uRtwWPGIgGA)은 2026-09-24 오전 6시 뉴욕 시간 공개 예약 상태이며, 설명란에 14개 챕터를 넣었습니다. 사람의 전편 음성 청취 판정은 남아 있지 않습니다.

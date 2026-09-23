@@ -1,5 +1,4 @@
-0:00 Astra + Claude + Jev
-0:08 만든다 · 판단한다
+0:00 오늘 할 일 · Astra + Claude + Jev
 0:23 Jev의 역할
 0:43 같은 폴더에서 시작
 1:04 API 키는 서버에
