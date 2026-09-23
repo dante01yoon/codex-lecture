@@ -1,0 +1,36 @@
+{
+  "format": "jev-final-media-v2@1",
+  "checked_at": "2026-09-23",
+  "video": "Final MP4 remains in the production workspace and is not included in this practice repository.",
+  "sha256": "843c8a1bd666dee08aa1f58505e854ca938e6f5649a302b190d1559bc003ae0a",
+  "hypit_build": "bld_20260923T042625756Z_76883917CC",
+  "hypit_requests": {
+    "total": 35,
+    "local": 35,
+    "external_or_provider": 0
+  },
+  "container": "MP4",
+  "duration_seconds": 255.966667,
+  "video_stream": {
+    "codec": "H.264",
+    "width": 1920,
+    "height": 1080,
+    "frame_rate": "30/1",
+    "frames": 7679
+  },
+  "audio_stream": {
+    "codec": "AAC",
+    "sample_rate_hz": 48000,
+    "channels": 2,
+    "integrated_loudness_lufs": -14.1,
+    "loudness_range_lu": 2.8,
+    "true_peak_dbtp": -4.63,
+    "audio_source": "AAC stream copied from the v1 final MP4; picture is the v2 Hypit render",
+    "packet_sha256": "3f93eda5b0a3f29122e747ca6cfe4774c7ca42d4b049ffbd620b793c04914efb"
+  },
+  "full_ffmpeg_decode": "PASS",
+  "browser_transport": "PASS",
+  "human_audio_listening": "NOT_RUN",
+  "youtube_upload": "NOT_DONE",
+  "browser_playback_evidence": "playback.json"
+}

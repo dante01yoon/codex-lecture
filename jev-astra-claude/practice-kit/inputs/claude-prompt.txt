@@ -1,0 +1,11 @@
+이 폴더의 DANTE Support Desk는 Astra가 만든 실제 Jev 문의 분류 앱입니다. TypeSafe 스킬을 읽고, 기본 디자인과 API 계약을 유지하면서 사람 검토 정책을 추가해 주세요. 설계는 승인되었으며 구현과 검사를 끝내 주세요.
+
+당신의 소유 범위는 현재 app/의 policy.mjs, public/ 또는 해당 UI 파일, 정책 테스트, README뿐입니다. 서버에 필요한 최소 연결 변경은 허용합니다. 상위 폴더는 다른 제작자가 작업 중이니 수정하지 마세요. API 키를 찾거나 읽지 말고 유료 API 호출도 하지 마세요. 합성 응답 fixtures로 오프라인 테스트만 수행하세요. 다른 에이전트를 생성하지 마세요.
+
+1. deriveDecision(raw, threshold=0.75)는 기존 department/confidence/urgentProbability를 보존하며 routing ('team' 또는 'review'), reasons 배열, threshold를 추가합니다. unknown, confidence<threshold, urgentProbability>=0.8이면 review. 그렇지 않으면 team. missing/invalid/NaN/out-of-range 값은 에러 또는 review로 실패 닫힘 처리.
+2. UI에 #threshold 슬라이더(0~1 step .05)와 수치 label, 검토함/담당 팀 표시와 검토 이유를 넣습니다. 기존 응답을 저장해 슬라이더 변경 때 API 재호출 없이 같은 정책을 적용합니다. 프론트/서버 정책이 달라지지 않게 순수 함수 재사용 구조로 구현합니다.
+3. 결과에 department choice와 confidence, urgent Noul을 다른 이름으로 표시. confidence를 정답률이나 사실 확률로 표현하지 않습니다. threshold는 '실습용 기준'이라고 표시. 어떤 메시지도 외부 발송하지 않음.
+4. #result data-state idle/loading/done/error, #raw-toggle/#raw-response와 기존 selectors를 보존. 사진이나 그래프 장식 추가 없이 기존 레이아웃에 자연스럽게 배치.
+5. 테스트는 threshold 경계, unknown, 긴급, missing/NaN/범위 밖, threshold 변경이 raw를 바꾸지 않음, 원래 성공경로, 오류 응답을 다룹니다. 실제 사용자 동작과 연결되는 검사를 작성. npm test 실행.
+
+완료되면 변경 요점과 실제 테스트 결과를 한국어로 짧게 보고하세요. 실제 네트워크 Jev 검사나 사람 청취 같은 수행하지 않은 검사를 완료라고 하지 마세요.

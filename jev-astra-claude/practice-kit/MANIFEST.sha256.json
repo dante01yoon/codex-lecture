@@ -1,0 +1,253 @@
+{
+  "format": "dante.practice-manifest.v1",
+  "package": "jev-astra-claude-practice",
+  "created_utc": "2026-09-23T04:22:27.377356+00:00",
+  "hash_algorithm": "sha256",
+  "manifest_self_excluded": true,
+  "learner_runtime_counter": "fresh app starts at 0",
+  "evidence_selection": {
+    "included_records": 17,
+    "omitted_records": 0
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1236,
+      "sha256": "bb5d11298e58f5e5c785314e9131b0f0cd58f650f15b4211cbfc297aa1bad2d3",
+      "source": "generated package entrypoint",
+      "transformations": []
+    },
+    {
+      "path": "app/.agents/skills/typesafe-ai/LICENSE",
+      "bytes": 1068,
+      "sha256": "835f233f1d6ed84a9b9a351aba0689b47644a4137d6316911fc7957bde523b02",
+      "source": "app/.agents/skills/typesafe-ai/LICENSE",
+      "transformations": []
+    },
+    {
+      "path": "app/.agents/skills/typesafe-ai/SKILL.md",
+      "bytes": 10040,
+      "sha256": "71ea90d7906c6554c4f4c460ef7361b2d26f59116ccdae986dc6d997b9389f52",
+      "source": "app/.agents/skills/typesafe-ai/SKILL.md",
+      "transformations": []
+    },
+    {
+      "path": "app/.claude/skills/typesafe-ai/LICENSE",
+      "bytes": 1068,
+      "sha256": "835f233f1d6ed84a9b9a351aba0689b47644a4137d6316911fc7957bde523b02",
+      "source": "app/.claude/skills/typesafe-ai/LICENSE",
+      "transformations": []
+    },
+    {
+      "path": "app/.claude/skills/typesafe-ai/SKILL.md",
+      "bytes": 10040,
+      "sha256": "71ea90d7906c6554c4f4c460ef7361b2d26f59116ccdae986dc6d997b9389f52",
+      "source": "app/.claude/skills/typesafe-ai/SKILL.md",
+      "transformations": []
+    },
+    {
+      "path": "app/.gitignore",
+      "bytes": 36,
+      "sha256": "e421a00aff05268d911d424f3283dfa2bbcc05605cf294909f0aadda5d9edaf9",
+      "source": "app/.gitignore",
+      "transformations": []
+    },
+    {
+      "path": "app/README.ko.md",
+      "bytes": 6016,
+      "sha256": "0b11362bb162c2c95dadcc0c354e739a47f4b5ea34c0a5ea8b6e1afa69e050e3",
+      "source": "app/README.ko.md",
+      "transformations": []
+    },
+    {
+      "path": "app/example.env",
+      "bytes": 18,
+      "sha256": "f6ddcf83f133c9affaa102ac7a48b2369737953b925c98f06dc477d74a71031c",
+      "source": "app/example.env",
+      "transformations": [
+        "environment example forced empty"
+      ]
+    },
+    {
+      "path": "app/package.json",
+      "bytes": 175,
+      "sha256": "5576eab921253d4e0294222fa8581434498a49eda911a3b98b7079ca4b66b2ba",
+      "source": "app/package.json",
+      "transformations": []
+    },
+    {
+      "path": "app/policy.mjs",
+      "bytes": 1571,
+      "sha256": "c515200645b12c427f2b53b1df1035228a55c0d1c19b037d03fee9edcbd5d75e",
+      "source": "app/policy.mjs",
+      "transformations": []
+    },
+    {
+      "path": "app/public/app.js",
+      "bytes": 5924,
+      "sha256": "3ffa5c6e54f4058ddab0ddd961d775203ac43aa8828171e51cd687552e47afca",
+      "source": "app/public/app.js",
+      "transformations": []
+    },
+    {
+      "path": "app/public/index.html",
+      "bytes": 5547,
+      "sha256": "097d7a532dee5d8c6b8d933eb400acabd8185abe8b5e82eaed1781f9ee89ec13",
+      "source": "app/public/index.html",
+      "transformations": []
+    },
+    {
+      "path": "app/public/style.css",
+      "bytes": 8672,
+      "sha256": "d6bbaeb6fd9192eb3f342a0823bbf7c4f047875702bfa1bd8c27ec869f9005cb",
+      "source": "app/public/style.css",
+      "transformations": []
+    },
+    {
+      "path": "app/server.mjs",
+      "bytes": 9486,
+      "sha256": "936fe83f545776b45b550c8fb61e7a2175a0b26f8c386f4d06cee4271b82339f",
+      "source": "app/server.mjs",
+      "transformations": []
+    },
+    {
+      "path": "app/skills-lock.json",
+      "bytes": 272,
+      "sha256": "73020e856455f67c4755b174779bc95f23be6c9264a1082141b37bf12a5a3196",
+      "source": "app/skills-lock.json",
+      "transformations": []
+    },
+    {
+      "path": "app/start-demo.sh",
+      "bytes": 217,
+      "sha256": "866e0610c1ce64aee48d5982f53f6aa2f759dba5b0066e1e7494fdcb71661699",
+      "source": "app/start-demo.sh",
+      "transformations": []
+    },
+    {
+      "path": "app/test/policy.test.mjs",
+      "bytes": 4846,
+      "sha256": "a7a8c03a0d212faf46bf7e249f61f0b6a22b598fd43978c422f21284443881aa",
+      "source": "app/test/policy.test.mjs",
+      "transformations": []
+    },
+    {
+      "path": "app/test/server.test.mjs",
+      "bytes": 10482,
+      "sha256": "8bd833bf2b40d10ab2cf60fa57c3f8f8b28f31031293dc59442778a72431cabe",
+      "source": "app/test/server.test.mjs",
+      "transformations": []
+    },
+    {
+      "path": "app/test/ui.test.mjs",
+      "bytes": 10654,
+      "sha256": "1d8fa5bce2d21e7d63be7757391f5f17e7d4195578ec23e0e47c5b5cd1d098ec",
+      "source": "app/test/ui.test.mjs",
+      "transformations": []
+    },
+    {
+      "path": "evidence/jev-requests.sanitized.jsonl",
+      "bytes": 27188,
+      "sha256": "1b87e67de261eb37243c906aae804fab4444cac0ea5ee4a567624dcf3cc5e24b",
+      "source": "app/evidence/jev-requests.jsonl",
+      "transformations": [
+        "only known synthetic teaching inputs and HTTP 200 rows",
+        "explicit request/response field allowlist",
+        "outside app runtime evidence directory"
+      ]
+    },
+    {
+      "path": "inputs/astra-prompt.txt",
+      "bytes": 4322,
+      "sha256": "16f79c01c2f17673b3a5cc193b98cc4f7772ba1209de8181f06c0758093de7d1",
+      "source": "evidence/astra/prompt.txt",
+      "transformations": []
+    },
+    {
+      "path": "inputs/astra-terminal-prompt.txt",
+      "bytes": 1131,
+      "sha256": "c1320f43aed1c08e11586f45e7b48e84faee3cc90ed2e9f2ec26e61396640bba",
+      "source": "inputs/astra-terminal-prompt.txt",
+      "transformations": []
+    },
+    {
+      "path": "inputs/claude-prompt.txt",
+      "bytes": 2344,
+      "sha256": "8e6024171c7c75d8932a6a0cf2a9ca502c3100d00cf19371100b59c90b689f6b",
+      "source": "evidence/claude/prompt.txt",
+      "transformations": []
+    },
+    {
+      "path": "inputs/claude-terminal-prompt.txt",
+      "bytes": 699,
+      "sha256": "03e7ff44cc7d67aae6549c8d8aac32eab9889e253fe922685650b9a35da44618",
+      "source": "inputs/claude-terminal-prompt.txt",
+      "transformations": []
+    },
+    {
+      "path": "inputs/coding-agents.md",
+      "bytes": 5150,
+      "sha256": "e61ec46260302e87e21ca65fe2a1d67ae6c2741a4a586645ace5dd7d9f501175",
+      "source": "inputs/coding-agents.md",
+      "transformations": []
+    },
+    {
+      "path": "inputs/confidence.md",
+      "bytes": 11396,
+      "sha256": "97dafe98b77979906a2ad456013dd85a70dcecd109d0644b096817d910997ea5",
+      "source": "inputs/confidence.md",
+      "transformations": []
+    },
+    {
+      "path": "inputs/index.md",
+      "bytes": 16019,
+      "sha256": "486685db6fec679ca3c7149f15b19c1ab069adbbc7a4b2369e80e5fc0f8caf64",
+      "source": "inputs/index.md",
+      "transformations": []
+    },
+    {
+      "path": "inputs/quickstart.md",
+      "bytes": 7053,
+      "sha256": "c30183944985b269c49939140272f9eec885895df346f19d76cf9b04e18073d2",
+      "source": "inputs/quickstart.md",
+      "transformations": []
+    },
+    {
+      "path": "inputs/skill.md",
+      "bytes": 10040,
+      "sha256": "71ea90d7906c6554c4f4c460ef7361b2d26f59116ccdae986dc6d997b9389f52",
+      "source": "inputs/skill.md",
+      "transformations": []
+    },
+    {
+      "path": "jev-connection-guide.md",
+      "bytes": 5755,
+      "sha256": "4d6f8dac3bf26971e750e82e00988ce7db069dd1c2e25e47aba482e4e420db7c",
+      "source": "production/jev-connection-guide.ko.md",
+      "transformations": []
+    },
+    {
+      "path": "practice-guide.md",
+      "bytes": 13426,
+      "sha256": "ce8051b9fd2f6479839f0894b5f5094cbc37ec2cf40307ecf0715eac9c5a3d67",
+      "source": "production/practice-guide.md",
+      "transformations": []
+    },
+    {
+      "path": "reference/reference-metadata.json",
+      "bytes": 328,
+      "sha256": "04f0dc2a5cdde00ed3d221c42e178ef788e782d0abbe83a70850fbf0dd501cbc",
+      "source": "reference/source.info.json",
+      "transformations": [
+        "public attribution fields only; media URLs and downloader internals omitted"
+      ]
+    },
+    {
+      "path": "sources.json",
+      "bytes": 1624,
+      "sha256": "b762d9ef9ca6f1fa7cfaac602833100f052e495f36de66df9893a873d926d1f1",
+      "source": "generated from curated official URLs and saved reference metadata",
+      "transformations": []
+    }
+  ]
+}

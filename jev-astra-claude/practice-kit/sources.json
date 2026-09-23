@@ -1,0 +1,51 @@
+{
+  "reference_video": {
+    "id": "fMV6JKkQVfE",
+    "title": "JEV Is NOT an LLM — Here’s What It Actually Does",
+    "channel": "Zubair Trabzada | AI Workshop",
+    "channel_url": "https://www.youtube.com/channel/UC2b2wgxm0vFjQfJJ0iRcFRw",
+    "upload_date": "20260921",
+    "duration": 569,
+    "webpage_url": "https://www.youtube.com/watch?v=fMV6JKkQVfE"
+  },
+  "official_sources": [
+    {
+      "title": "TypeSafe documentation index",
+      "url": "https://docs.typesafe.ai/llms.txt",
+      "saved_copy": "inputs/index.md"
+    },
+    {
+      "title": "TypeSafe Quick start",
+      "url": "https://docs.typesafe.ai/introduction/quickstart.md",
+      "saved_copy": "inputs/quickstart.md"
+    },
+    {
+      "title": "Jev with coding agents",
+      "url": "https://docs.typesafe.ai/introduction/coding-agents.md",
+      "saved_copy": "inputs/coding-agents.md"
+    },
+    {
+      "title": "TypeSafe Confidence",
+      "url": "https://docs.typesafe.ai/confidence.md",
+      "saved_copy": "inputs/confidence.md"
+    },
+    {
+      "title": "TypeSafe Noul",
+      "url": "https://docs.typesafe.ai/primitives/noul.md"
+    },
+    {
+      "title": "TypeSafe official skill",
+      "url": "https://github.com/typesafe-ai/skills/blob/main/skills/typesafe-ai/SKILL.md",
+      "saved_copy": "inputs/skill.md"
+    },
+    {
+      "title": "Codex CLI",
+      "url": "https://learn.chatgpt.com/docs/codex/cli"
+    },
+    {
+      "title": "Claude Code setup",
+      "url": "https://code.claude.com/docs/en/setup"
+    }
+  ],
+  "note": "Saved document snapshots accompany the tutorial. Consult official URLs for subsequent changes."
+}

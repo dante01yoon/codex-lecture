@@ -1,0 +1,1 @@
+이 Jev 문의 분류 앱의 사람 검토 규칙을 실제 코드와 테스트로 확인해 주세요. .claude/skills/typesafe-ai/SKILL.md와 policy.mjs, public/app.js, test를 읽고, unknown / confidence<threshold / urgent>=0.8 규칙과 슬라이더가 API를 재호출하지 않는 이유를 확인하세요. npm test를 직접 실행하세요. 버그가 있으면 정책과 테스트만 수정하고, 없으면 수정하지 마세요. API 키나 사적인 파일을 읽지 말고 유료 API 호출도 하지 마세요. 다른 제작자의 UI나 상위 폴더 변경을 되돌리지 마세요. 마지막으로 실제 실행한 검사 수와 검토 기준을 한국어로 짧게 설명하세요.

@@ -5,5 +5,6 @@
 | 강의 | 실습 폴더 | 영상 |
 |---|---|---|
 | Codex Code Mode · 4가지 활용법 | [codemode_lecture](codemode_lecture/) | [유튜브 영상](https://youtu.be/n73CZL509Po) |
+| Astra · Claude Code · Jev 연결 실습 | [jev-astra-claude](jev-astra-claude/) | 게시 전 |
 
 각 폴더의 README에 설치, 실행, 결과 확인, 응용 과제가 있습니다. 처음이라면 저장된 결과부터 열어보세요.

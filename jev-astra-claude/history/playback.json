@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "page": "http://127.0.0.1:8810/output/watch.html?rev=dante-intro-v2",
+  "media_src": "/output/jev-astra-claude-hands-on.mp4",
+  "video_sha256": "843c8a1bd666dee08aa1f58505e854ca938e6f5649a302b190d1559bc003ae0a",
+  "playback_rate": "1x, native default; no speed control changed",
+  "observations": [
+    {
+      "time": "0:00",
+      "event": "clicked play; page button changed to pause"
+    },
+    {
+      "time": "1:02",
+      "event": "visible clock advanced"
+    },
+    {
+      "time": "3:39",
+      "event": "visible clock advanced"
+    },
+    {
+      "time": "4:15",
+      "event": "video clock reached displayed duration; page button returned to play"
+    }
+  ],
+  "seek_or_pause_during_review": false,
+  "html_media_ended_property": "NOT_READ; completion recorded from displayed duration and returned play control",
+  "human_listening": "NOT_RUN",
+  "scope": "Browser playback and visible progression only; does not establish human listening, pronunciation, vocal quality or perceptual audio/video sync."
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>DANTE Support Desk</title><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script></head>
+<body>
+<aside class="sidebar">
+  <div class="brand">DANTE<span>Support Desk</span></div>
+  <div class="nav-item">문의 분류</div>
+  <div class="side-note"><strong>만드는 역할과<br>판단하는 역할</strong><p>실습 구성<br>Astra · 앱 구현<br>Claude · 검토 규칙<br>Jev · 실행 중 판단</p></div>
+  <div class="connection"><span class="dot"></span><span id="health-status">서버 확인 중</span></div>
+</aside>
+<main>
+  <header><div class="eyebrow">고객 지원 워크스페이스</div><h1>문의에서 담당 팀까지.</h1><p>한국어 문의를 읽고, 담당 팀과 긴급성을 함께 판단합니다.</p></header>
+  <div class="workspace">
+    <section class="input-panel" aria-labelledby="input-title">
+      <div class="section-heading"><h2 id="input-title">01 <span>문의 입력</span></h2><span class="tag">한국어</span></div>
+      <form id="ticket-form">
+        <label for="ticket-input">어떤 도움이 필요한가요?</label>
+        <textarea id="ticket-input" placeholder="고객의 문의 내용을 입력하거나 아래 예시를 선택하세요." aria-describedby="input-count"></textarea>
+        <div id="input-count" class="count">0 / 1,200자</div>
+        <div class="actions"><button id="classify-btn" class="primary" type="submit">담당 팀 판단하기 <span aria-hidden="true">↗</span></button><button id="reset-btn" type="button">초기화</button></div>
+      </form>
+      <div class="examples-heading"><h3>예시로 시작하기</h3><span>합성 문의 4개</span></div>
+      <div class="examples">
+        <button data-example="billing"><strong>결제 · 환불</strong><span>어제 결제가 두 번 됐어요. 중복 결제 한 건을 환불해 주세요.</span></button>
+        <button data-example="technical"><strong>접속 · 기능 오류</strong><span>로그인 버튼을 누르면 오류가 나서 관리 화면에 들어갈 수 없습니다.</span></button>
+        <button data-example="sales"><strong>도입 · 요금제</strong><span>팀원 15명이 함께 쓰려고 합니다. 팀 요금제와 도입 절차를 알려주세요.</span></button>
+        <button data-example="ambiguous"><strong>근거가 부족한 문의</strong><span>지난번에 말씀드린 건이 아직 그대로예요. 확인 부탁드립니다.</span></button>
+      </div>
+    </section>
+    <section id="result" data-state="idle" aria-labelledby="result-title" aria-busy="false">
+      <div class="section-heading"><h2 id="result-title">02 <span>판단 결과</span></h2><span id="response-badge" class="tag">대기 중</span></div>
+      <div id="result-message" role="status" aria-live="polite">문의를 입력하면<br>Jev의 판단이 이곳에 표시됩니다.</div>
+      <div id="decision-content" hidden>
+        <div class="department-block"><span>Jev가 고른 담당 팀</span><span class="term">Department Choice</span><h3 id="department-value"></h3><p id="department-description"></p></div>
+        <div id="routing-block" class="routing-block"><div class="routing-row"><span>처리 경로</span><strong id="routing-value"></strong></div><p id="routing-reasons"></p></div>
+        <div class="metrics">
+        <div class="metric"><div><span>선택 신뢰도</span><span class="term">Choice confidence · 정답률 아님</span></div><strong id="confidence-value"></strong></div>
+        <div class="metric"><div><span>긴급 신호</span><span class="term">Urgent Noul · Yes 값</span></div><strong id="urgent-value"></strong></div>
+        </div>
+        <details class="metric-details"><summary>판단 값 해석</summary><p class="metric-note">선택 신뢰도는 네 선택지 사이에 판단이 얼마나 모였는지이며<br>정답률이나 사실일 확률이 아닙니다. 긴급 신호는 긴급성 질문의 Yes 값입니다.</p></details>
+        <dl class="metadata"><div><dt>응답 모델</dt><dd id="model-value"></dd></div><div><dt>입력 토큰</dt><dd id="tokens-value"></dd></div><div><dt>응답 시간</dt><dd id="elapsed-value"></dd></div><div><dt>요청 번호</dt><dd id="request-value"></dd></div></dl>
+      </div>
+      <div class="policy-control">
+        <div class="policy-row"><label for="threshold">사람 검토 기준 <span class="tag">실습용 기준</span></label><output id="threshold-value" for="threshold">0.75</output></div>
+        <input id="threshold" type="range" min="0" max="1" step="0.05" value="0.75" aria-describedby="threshold-note">
+        <details class="policy-details"><summary>상세 검토 정책</summary>
+        <p id="threshold-note" class="policy-note">선택 신뢰도가 기준보다 낮거나, 담당 팀 미정이거나, 긴급 신호가 0.80 이상이면 검토함으로 보냅니다. 실제 데이터로 검증한 값이 아니며, 기준을 바꿔도 API를 다시 호출하지 않습니다. 결과는 화면에만 표시되고 어떤 메시지도 외부로 보내지 않습니다.</p>
+        </details>
+      </div>
+      <div class="raw-area"><button id="raw-toggle" type="button" aria-expanded="false" aria-controls="raw-response" disabled>원본 JSON 펼치기 ＋</button><pre id="raw-response" hidden></pre></div>
+      <p class="result-footer">한 번의 요청 · 두 가지 판단</p>
+    </section>
+  </div>
+</main>
+</body></html>

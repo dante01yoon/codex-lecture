@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "cue_count": 62,
+  "monotonic_nonoverlapping": true,
+  "within_master_duration": true,
+  "duration_seconds": 255.966667,
+  "first_caption_start": 0.2,
+  "first_caption_end": 7.5600000000000005,
+  "subtitle_sha256": "6ab5952ebc14518171342c48a3c6a263c1993c8823cf6b607a9edf8ec0e34dfc",
+  "human_listening": "NOT_RUN",
+  "note": "Structure and coverage only; no human listening or perceptual sync claim."
+}

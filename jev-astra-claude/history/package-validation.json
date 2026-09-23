@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "zip": "../downloads/jev-astra-claude-practice.zip",
+  "sha256": "0f10e6161dcfc023d1b71036c5e7fd24800344975d7f3035e0586733608ee7b5",
+  "bytes": 74717,
+  "entries": 34,
+  "zip_crc_test": "PASS",
+  "every_entry_reopened": "PASS",
+  "manifest_shas": "PASS",
+  "shareability_allowlist_scan": "PASS",
+  "app_runtime_evidence_included": false,
+  "new_guide": "jev-connection-guide.md",
+  "new_guide_sha256": "4d6f8dac3bf26971e750e82e00988ce7db069dd1c2e25e47aba482e4e420db7c",
+  "evidence_selection": {
+    "included_records": 17,
+    "omitted_records": 0
+  },
+  "not_claimed": [
+    "learner clean-machine install",
+    "final video playback",
+    "human audio listening"
+  ]
+}

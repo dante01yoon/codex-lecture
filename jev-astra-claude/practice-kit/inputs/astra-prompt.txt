@@ -1,0 +1,19 @@
+TypeSafe skill을 사용해 실제 동작하는 로컬 웹 앱 DANTE Support Desk를 만들어 주세요. 계획 설명으로 멈추지 말고 구현과 오프라인 검사를 끝내세요. 이 프롬프트의 설계는 승인된 영상 실습입니다.
+
+목적: 한국어 문의를 입력하면 서버가 Jev에 Choice와 Noul 질문을 한 번에 보내고, 실제 응답으로 담당 팀과 긴급도를 표시합니다. Astra가 앱을 만들고 Jev가 실행 중 판단한다는 역할을 가르칩니다.
+
+구현 범위는 현재 app 폴더뿐입니다. 다른 제작자가 상위 폴더에서 작업 중이므로 건드리지 마세요. .agents/skills/typesafe-ai/SKILL.md를 읽고 ../inputs의 공식 문서도 참고하세요. 필요한 공개 공식 문서는 읽어도 됩니다. API 키나 사적인 파일을 찾지 말고, 실제 API를 호출하지 마세요. 키는 나중에 촬영 담당자가 TYPESAFE_API_KEY 환경변수로만 주입합니다.
+
+구현:
+- 외부 npm 의존성 없는 Node.js 20+ 서버(server.mjs)와 정적 HTML/CSS/JS. npm start, npm test. 기본 호스트127.0.0.1 포트8794.
+- POST /api/classify {text}. https://api.typesafe.ai/v1/systemone, model jev-1.13.0. Choice department 후보 billing(결제/환불), technical(접속/기능오류), sales(도입/요금제 문의), unknown(근거 부족/해당 없음). Noul urgent는 서비스 중단, 당장 처리해야 하는 구체적 기한 등 명시적 긴급성을 질문. 두 질문을 같은 호출에 포함.
+- 입력 최대1200자. 요청 직렬화 크기<=16000 bytes. 실습 총30회 호출 상한(요청 시작 전에 카운트 증가), 재시도 없음,20초 timeout. HTTP 오류는 명확히 보이고 성공 데이터로 가장하지 않음. 키 없는 상태도 명확히 표시.
+- evidence/jev-requests.jsonl 에 ISO 시각, 요청 본문, 원본 JSON응답, HTTP상태, elapsed_ms 기록. 헤더/키는 절대 기록하지 않음. counter는 evidence/call-count.json에 저장해 재시작 때도 상한 유지. GET /api/health는 키 존재 boolean만. GET /api/evidence 는 이 앱의 실습로그만 반환.
+- 서버 응답은 {raw,elapsed_ms,request_number,decision} 포함. decision은 department,confidence,urgentProbability. 브라우저에서 raw JSON 접기/펼치기. 실제 provider model과 input_tokens 표기, '실제 API 응답' 구분. 응답 전 가짜 수치나 고정 성공 결과 표시하지 않음.
+- UI: 밝은 아이보리 배경, 진한 남색 글자, 보라색 포인트. 왼쪽260px 사이드바 DANTE / Support Desk, 중간 문의 입력과 예시카드, 오른쪽 결과 상세. 한국어 중심. 폰트는 시스템 Apple SD Gothic Neo, UI 글자는 최소20px, 헤드라인38px. 1920x930 및1440x900에서 촬영하기 좋은 여유있는 레이아웃. 시각적 장식보다 작업 흐름이 선명. 사용자 UI에 구현용 경로나 프롬프트는 노출하지 않음.
+- 합성 예시4개: billing='어제 결제가 두 번 됐어요. 중복 결제 한 건을 환불해 주세요.'; technical='로그인 버튼을 누르면 오류가 나서 관리 화면에 들어갈 수 없습니다.'; sales='팀원 15명이 함께 쓰려고 합니다. 팀 요금제와 도입 절차를 알려주세요.'; ambiguous='지난번에 말씀드린 건이 아직 그대로예요. 확인 부탁드립니다.'
+- selectors: textarea#ticket-input, button#classify-btn, button#reset-btn, button#raw-toggle, pre#raw-response, section#result, button[data-example='billing'/'technical'/'sales'/'ambiguous']. #result data-state idle/loading/done/error. 결과 변경 시 은은한 200ms transition. 필드 값은 textContent로 렌더.
+- 우선 기본판은 선택한 부서와 confidence/urgent 확률만 표시. 자동 메일 발송 등 외부행동 없음. 다음 단계 Claude가 사람검토 정책을 추가할 예정입니다. policy.mjs에 pure deriveDecision(raw)함수와 기존 동작 검사만 분리해 주세요.
+- README.ko.md에 설치, 환경변수 이름만, 실행법, 실제 API와 offline test 차이 설명. .gitignore는 .env와evidence 무시. example.env에는 빈 값만.
+
+실제 network API 호출 없이 npm test를 수행하고 결과 요약과 변경 파일 목록을 알려주세요. 모델 이름에 관한 자가주장, 성능우월, 비용절감 주장은 쓰지 마세요.
